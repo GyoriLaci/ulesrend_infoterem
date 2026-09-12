@@ -20,3 +20,31 @@ Egy egyszerű, Pythonban írt grafikus felületű (Tkinter) alkalmazás, amely s
 1. Indítsd el a programot:
    ```bash
    python main.py
+2. Kattints a 📁 Nevek betöltése (.txt) gombra, és válaszd ki a diákok névsorát tartalmazó fájlt.
+
+3. Kattints azokra a gépekre, amelyek nem működnek (pirosra váltanak).
+
+4. Kattints a Ülésrend generálás gombra a véletlenszerű ülésrend kiosztásához.
+
+5. A 🖨️ Nyomtatás / PDF gombbal megjelenítheted a nyomtatóbarát nézetet.
+
+## Bemeneti fájl formátuma (.txt)
+A program a következő struktúrájú szöveges fájlokat dolgozza fel:
+
+Plaintext
+1
+Jhone Doe
+1
+2
+3
+4
+5
+-
+2
+Kis Pista
+1
+2
+3
+4
+5
+-
