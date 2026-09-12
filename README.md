@@ -31,7 +31,6 @@ Egy egyszerű, Pythonban írt grafikus felületű (Tkinter) alkalmazás, amely s
 ## Bemeneti fájl formátuma (.txt)
 A program a következő struktúrájú szöveges fájlokat dolgozza fel:
 ```bash
-Plaintext
 1
 Jhone Doe
 1
