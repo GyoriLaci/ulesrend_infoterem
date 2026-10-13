@@ -148,26 +148,41 @@ class ClassroomSeatingApp:
 
         try:
             with open(file_path, "r", encoding="utf-8") as f:
-                lines = [line.strip() for line in f.readlines()]
+                lines = [
+                    line.replace("\xa0", " ").strip() for line in f.readlines()
+                ]
 
             parsed_names = []
             i = 0
             while i < len(lines):
                 line = lines[i]
-                if line.isdigit():
-                    if i + 1 < len(lines):
-                        name = lines[i + 1].strip()
-                        if name and name != "-":
-                            parsed_names.append(name)
-                        i += 2
-                        while i < len(lines) and lines[i] != "-":
-                            i += 1
+
+                # Ha a sor nem üres
+                if line:
+                    # 1. eset: Külön sorban álló sorszám (pl. "2", "3")
+                    if line.isdigit():
+                        if i + 1 < len(lines):
+                            candidate = lines[i + 1].strip()
+                            if candidate and not candidate.endswith("-"):
+                                parsed_names.append(candidate)
+                                i += 2
+                    # 2. eset: Nincs előtte sorszám, közvetlenül névvel kezdődik a blokk
+                    elif not line.endswith("-") and not any(
+                        c.isdigit() for c in line
+                    ):
+                        parsed_names.append(line)
+                        i += 1
+
+                    # Átugorjuk a blokk többi részét a kötőjeles elválasztóig (pl. "• -", "-", "•	-")
+                    while i < len(lines) and not lines[i].endswith("-"):
+                        i += 1
+
                 i += 1
 
             if not parsed_names:
                 messagebox.showwarning(
                     "Figyelem",
-                    "Nem található a megadott formátumnak megfelelő név a fájlban.",
+                    "Nem található név a fájlban a megadott formátum alapján.",
                 )
                 return
 
